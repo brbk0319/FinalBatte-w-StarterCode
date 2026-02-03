@@ -5,6 +5,7 @@ namespace FinalBattler.Character
 {
     public class Hero : Creations, IHero
     {
+        public string Name { get; set; }
         public int Health { get; set; }
         public int Power { get; set; }
         public int Luck { get; set; }
@@ -18,6 +19,40 @@ namespace FinalBattler.Character
 
         public Hero()
         {
+            Name = "Unknown";
+            Level = 0; Health = 1; Power = 1; Luck = 1; Mana = 1; ExperienceRemaining = 1;
+            CombatClass = GetClass();
+        }
+
+        public void DisplayStats(bool showTotalStats = false)
+        //The bool will be used to decide whether to show total stats or the natural stats(no equipment).
+        {
+            if (!showTotalStats)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        public void LevelUp()
+        {
+
+
+
+            /* 
+                None
+                Warrior
+                Wizard
+                Rogue 
+            */
+
+
+        }
+        public void CalculateTotals()
+        {
+            //natural stats + stats from equipment
         }
     }
 }
