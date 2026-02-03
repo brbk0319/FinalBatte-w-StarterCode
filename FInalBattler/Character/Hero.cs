@@ -20,35 +20,66 @@ namespace FinalBattler.Character
         public Hero()
         {
             Name = "Unknown";
-            Level = 0; Health = 1; Power = 1; Luck = 1; Mana = 1; ExperienceRemaining = 1;
+            Level = 0; TotalHealth = 1; TotalLuck = 1; TotalPower = 1;
+            Health = 1; Power = 1; Luck = 1; Mana = 1; ExperienceRemaining = 1;
             CombatClass = GetClass();
+            Items = new List<Item>();
+            Skills = new List<Skill>();
+            Spells = new List<Spell>();
+            Equipment = new List<Equipment>();
         }
+        public Hero(string name)
+        {
+            Name = name;
+            Level = 0; TotalHealth = 1; TotalLuck = 1; TotalPower = 1;
+            Health = 1; Power = 1; Luck = 1; Mana = 1; ExperienceRemaining = 1;
+            CombatClass = GetClass();
+            Items = new List<Item>();
+            Skills = new List<Skill>();
+            Spells = new List<Spell>();
+            Equipment = new List<Equipment>();
+        }
+
 
         public void DisplayStats(bool showTotalStats = false)
         //The bool will be used to decide whether to show total stats or the natural stats(no equipment).
         {
             if (!showTotalStats)
             {
-
+                Console.WriteLine($"{Name.ToUpper()} Status:\n   Level: {Level}\n   Health: {Health}\n   Power: {Power}\n   Luck: {Luck}\n   Mana: {Mana}\n   ExperienceRemaining: {ExperienceRemaining}");
             }
             else
             {
-
+                Console.WriteLine($"{Name.ToUpper()} Status:\n   Level: {Level}\n   Total Health: {Health}/{TotalHealth}\n   Power: {Power}/{TotalPower}\n   Luck: {Luck}/{TotalLuck}\n   Mana: {Mana}\n   ExperienceRemaining: {ExperienceRemaining}");
+                //how to do total stats?
             }
         }
         public void LevelUp()
         {
-
-
-
-            /* 
-                None
-                Warrior
-                Wizard
-                Rogue 
-            */
-
-
+            Random rng = new Random();
+            switch ( CombatClass )
+            {
+                case CombatClass.None:
+                    Health += rng.Next(1, 5);
+                    Power += rng.Next(1, 2);
+                    Luck += rng.Next(1, 2);
+                    break;
+                case CombatClass.Warrior:
+                    Health += rng.Next(10, 20);
+                    Power += rng.Next(1, 3);
+                    Luck += rng.Next(1, 3);
+                    break;
+                case CombatClass.Wizard:
+                    Health += rng.Next(1, 15);
+                    Power += rng.Next(3, 5);
+                    Luck += rng.Next(1, 15);
+                    break; 
+                case CombatClass.Rogue:
+                    Health += rng.Next(1, 15);
+                    Power += rng.Next(1, 3);
+                    Luck += rng.Next(3-5);
+                    break;
+            }
         }
         public void CalculateTotals()
         {
