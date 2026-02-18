@@ -13,6 +13,8 @@ namespace FinalBattler.GamePlay
 
         public void Start()
         {
+            Console.WriteLine("WELCOME TO THE GAME");
+
             Player1 = GetPlayer();
             Player2 = new Hero("Bob", CombatClass.Rogue);
 
