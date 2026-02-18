@@ -5,56 +5,26 @@ namespace FinalBattler.Character
 {
     public class Creations : IDamageCalulator
     {
-        public string Name { get; set; } = string.Empty;
-        public int Level { get; set; }
-        public int CurrentHealth { get; set; }
-        public int TotalHealth { get; set; }
-        public int TotalPower { get; set; }
-        public int TotalLuck { get; set; }
-
-        private bool FirstTurn { get; set; }
+        public string Name { get; set; }
+        public int Level { get; protected set; }
+        public int CurrentHealth { get; protected set; }
+        public int TotalHealth { get; protected set; }
+        public int TotalPower { get; protected set; }
+        public int TotalLuck { get; protected set; }
 
         public Creations() { }
-
-        public CombatClass GetClass()
-        {
-            CombatClass creationsClass;
-            while (true)
-            {
-                Console.WriteLine("Pick your Character's Class.\n   1. None\n   2. Warrior\n   3. Wizard\n    4. Rogue");
-                string answer = Console.ReadLine() ?? "";
-                if (Enum.TryParse(answer, out creationsClass))
-                {
-                    return creationsClass;
-                }
-                else { Console.WriteLine("Haha, try again player.\n"); }
-            }
-        }
         
-        public void DisplayDamage(int damage)
+        public void GiveDamage(Creations enemy, int extraDamage = 0)
         {
-            //$"{name} takes {damage} damage
-            //$"current health is {health}"
-        }
-        public void GiveDamage(Creations enemy)
-        {
-            enemy.TakeDamage(TotalPower);
+            Console.WriteLine($"{Name} does {TotalPower} damage!");
+            enemy.TakeDamage(TotalPower + extraDamage);
         }
         public void TakeDamage(int damage)
         {
-            //health -= damage
-            //unless damage is more than health
-            //in which case health = 0
-            DisplayDamage(damage);
+            if (damage >= CurrentHealth) { CurrentHealth = 0; }
+            else { CurrentHealth -= damage; }
+
+            Console.WriteLine($"{Name} takes {damage} damage\nCurrent health is {CurrentHealth}");
         }
     }
-
-    public enum CombatClass
-    {
-        None = 1,
-        Warrior,
-        Wizard,
-        Rogue
-    }
-
 }

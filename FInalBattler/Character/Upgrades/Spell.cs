@@ -20,6 +20,7 @@
 
         public void CastSpell(Hero hero)
         {
+            if(ManaCost > hero.Mana) { Console.WriteLine($"You don't have enough mana to perform this spell.\n   Mana: {hero.Mana}"); }
         }
     }
 }
